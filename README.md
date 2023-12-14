@@ -20,3 +20,7 @@ letters_representation = [
 
 word_is_valid = min([l - w for l, w in zip(letters_representation, word_representation)]) >= 0
 ```
+
+## References
+
+words.json: https://github.com/dwyl/english-words
