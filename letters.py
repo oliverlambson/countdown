@@ -60,5 +60,10 @@ def main(input_letters: str):
 
 if __name__ == "__main__":
     letters = input("Countdown letters: ")
+    letters = letters.lower()
+    if not all(letter in ascii_lowercase for letter in letters):
+        logging.error("Letters must be in the alphabet.")
+        exit(1)
+
     matches = main(letters)
     print(matches)
