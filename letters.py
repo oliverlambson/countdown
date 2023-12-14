@@ -27,7 +27,28 @@ class Word:
         self.vector = np.array(list(self.full_representation.values()))
 
 
-def main(input_letters: str):
+def get_matches(input_letters: str, words: list[Word]) -> list[str]:
+    input_word = Word(input_letters)
+
+    result_matrix = -word_matrix + input_word.vector
+    non_negative_rows = np.all(result_matrix >= 0, axis=1)
+    indices = list(np.where(non_negative_rows)[0])
+    matches = sorted(
+        [word.word for i, word in enumerate(words) if i in indices],
+        key=lambda x: len(x),
+        reverse=True,
+    )
+
+    return matches
+
+
+if __name__ == "__main__":
+    letters = input("Countdown letters: ")
+    letters = letters.lower()
+    if not all(letter in ascii_lowercase for letter in letters):
+        logging.error("Letters must be in the alphabet.")
+        exit(1)
+
     logging.basicConfig(level=logging.INFO)
 
     logging.info("Loading dictionary...")
@@ -42,28 +63,8 @@ def main(input_letters: str):
     word_matrix = np.array([word.vector for word in words])
     logging.info("Dictionary loaded.")
 
-    input_word = Word(input_letters)
-
     logging.info("Calculating matches...")
-    result_matrix = -word_matrix + input_word.vector
-    non_negative_rows = np.all(result_matrix >= 0, axis=1)
-    indices = list(np.where(non_negative_rows)[0])
-    matches = sorted(
-        [word.word for i, word in enumerate(words) if i in indices],
-        key=lambda x: len(x),
-        reverse=True,
-    )
+    matches = get_matches(letters, words)
     logging.info("Matches calculated.")
 
-    return matches
-
-
-if __name__ == "__main__":
-    letters = input("Countdown letters: ")
-    letters = letters.lower()
-    if not all(letter in ascii_lowercase for letter in letters):
-        logging.error("Letters must be in the alphabet.")
-        exit(1)
-
-    matches = main(letters)
     print(matches)
