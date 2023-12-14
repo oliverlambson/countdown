@@ -1,6 +1,14 @@
 # Countdown
 
+I'm bad at the letters on countdown, so I've developed a cheat.
+
 ## Letters
+
+### The aLgoRiThM
+
+- Represent a word as an ordered vector of the count of each letter in the word.
+- Stack all word vectors to form a matrix that represents the dictionary.
+- `-dictionary_matrix + countdown_letters_vector` --> all rows that don't contain any negatives are valid solutions
 
 ```py
 all_words = ...
