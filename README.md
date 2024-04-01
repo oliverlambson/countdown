@@ -2,9 +2,15 @@
 
 I'm bad at the letters on countdown, so I made a way to cheat.
 
-## Letters
+## Usage
 
-### The algorithm
+```
+$ poetry run python letters.py
+> Countdown letters: <type them in>
+> <outputs all matching 3-9 letter words in the english dictionary>
+```
+
+## How it works (i.e., the algorithm)
 
 - Represent a word as an ordered vector of the count of each letter in the word.
 - Stack all word vectors to form a matrix that represents the dictionary.
